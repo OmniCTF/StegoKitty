@@ -1,0 +1,19 @@
+Stage 1: The XOR Combine
+Assets Provided: Yellow.png and Red.png.
+Solver Action: Must write a script or use an image manipulation tool (like StegSolve's Image Combiner) to XOR the two images together.
+Result: The solver successfully reconstructs Orange.png.
+
+Stage 2: The LSB Extraction
+Target: Orange.png.
+Solver Action: Must use an LSB tool (like zsteg or stegano-lsb) to read the Least Significant Bits of the reconstructed image.
+Result: The solver gets the MediaFire URL ([https://www.mediafire.com/view/q3hz1h7rmcugr83](https://www.mediafire.com/view/q3hz1h7rmcugr83)) and downloads Ragdoll.png.
+
+Stage 3: The Hidden Archive
+Target: Ragdoll.png.
+Solver Action: Must inspect the EXIF data using exiftool to find the string SuperSecretCatPassword hidden in the Comment tag. Then, they must use binwalk or unzip to carve the hidden zip file from the EOF (End of File) of the PNG.
+Result: The solver gets the password-protected zip, unlocks it, and extracts Birmanese.jpg.
+
+Stage 4: The Final Flag
+Target: Birmanese.jpg.
+Solver Action: Must recognize the image as a standard steghide payload and attempt to extract it using a blank passphrase (steghide extract -sf Birmanese.jpg -p "").
+Result: The solver gets flag.txt and wins the challenge.
